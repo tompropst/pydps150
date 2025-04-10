@@ -1,8 +1,3 @@
-もちろんです！GitLab の `README.md` を膨らませつつ、英語併記にしたバージョンを以下にご提案します：
-
----
-
-```markdown
 # PyDps150
 
 DPS-150 Programmable Power Supply Controller via Python  
