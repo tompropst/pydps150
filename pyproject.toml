@@ -1,0 +1,18 @@
+[project]
+name = "pydps150"
+version = "0.1.0"
+description = "DPS-150 Programmable Power Supply Controller via Python"
+readme = "README.md"
+requires-python = ">=3.8"
+dependencies = [
+    "pyserial>=3.5",
+]
+
+[project.optional-dependencies]
+examples = [
+    "matplotlib>=3.7",
+]
+
+[build-system]
+requires = ["uv_build>=0.9.9,<0.10.0"]
+build-backend = "uv_build"

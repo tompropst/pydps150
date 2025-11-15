@@ -1,10 +1,11 @@
-import matplotlib.pyplot as plt
+import sys
 import time
-from PyDps150 import PyDps150
+
+import matplotlib.pyplot as plt
+from pydps150.PyDps150 import PyDps150
 
 
-def measure_iv_curve(start=0.0, stop=2.0, step=0.1, iset=0.5):
-    dps = PyDps150()
+def measure_iv_curve(dps, start=0.0, stop=2.0, step=0.1, iset=0.5):
     dps.power_off()
     dps.vset(0.0)
     dps.iset(iset)
@@ -44,6 +45,13 @@ def plot_iv_curve(voltages, currents):
 
 
 if __name__ == "__main__":
-    voltages, currents = measure_iv_curve()
+    if len(sys.argv) < 2:
+        port = "/dev/ttyACM0"
+    else:
+        port = sys.argv[1]
+
+    dps = PyDps150(port=port)
+
+    voltages, currents = measure_iv_curve(dps=dps)
     plot_iv_curve(voltages, currents)
 
