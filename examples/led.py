@@ -1,10 +1,11 @@
+import sys
 import time
+
 import matplotlib.pyplot as plt
-from PyDps150 import PyDps150
+from pydps150.PyDps150 import PyDps150
 
 
-def measure_led_iv():
-    dps = PyDps150()
+def measure_led_iv(dps):
 
     try:
         dps.power_off()
@@ -52,5 +53,11 @@ def measure_led_iv():
 
 
 if __name__ == "__main__":
-    measure_led_iv()
+    if len(sys.argv) < 2:
+        port = "/dev/ttyACM0"
+    else:
+        port = sys.argv[1]
+
+    dps = PyDps150(port=port)
+    measure_led_iv(dps)
 

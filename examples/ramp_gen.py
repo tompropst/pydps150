@@ -1,5 +1,7 @@
-from PyDps150 import PyDps150
+import sys
 import time
+
+from pydps150.PyDps150 import PyDps150
 
 def format_val(val, unit):
     return f"{val:.2f} {unit}" if val is not None else f"N/A {unit}"
@@ -20,6 +22,10 @@ def ramp_voltage(dps, v_min=0.0, v_max=2.0, step=0.1, delay=0.1):
         dps.close()
 
 if __name__ == "__main__":
-    dps = PyDps150()
-    ramp_voltage(dps)
+    if len(sys.argv) < 2:
+        port = "/dev/ttyACM0"
+    else:
+        port = sys.argv[1]
 
+    dps = PyDps150(port=port)
+    ramp_voltage(dps)

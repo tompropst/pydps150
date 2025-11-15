@@ -1,5 +1,7 @@
 # PyDps150
 
+This is a fork of the work originally posted by [fanfanlab][fanfanlab].
+
 DPS-150 Programmable Power Supply Controller via Python  
 DPS-150をPythonから制御するためのシンプルなライブラリです。
 
@@ -21,20 +23,25 @@ USBプロトコルの逆解析に基づき、PySerialを使用して通信しま
 
 ## Requirements / 必要環境
 
-- Python 3.7+
+- Python 3.8+
 - PySerial
 - Matplotlib (for graphing scripts)
 
+## Installation
+
 ```bash
-pip install pyserial matplotlib
+pip install .
+
+# To run examples...
+pip install -e .[examples]
 ```
 
 ## Usage / 使用方法
 
 ```python
-from PyDps150 import PyDps150
+from pydps150.PyDps150 import PyDps150
 
-dps = PyDps150()
+dps = PyDps150(port="/dev/ttyACM0")
 dps.vset(3.3)
 dps.iset(1.0)
 dps.vget()  # Returns current voltage
@@ -42,8 +49,18 @@ dps.iget()  # Returns current current
 dps.close()
 ```
 
-See `ramp_gen.py`, `led.py`, etc. for measurement examples.  
-`ramp_gen.py` や `led.py` に使用例があります。
+See the `examples` directory for control and measurement examples.
+Each example can be run with the following command pattern:
+
+```sh
+python <example>.py <serial_port>
+```
+
+To run `example/ramp_gen.py` (replacing `/dev/ttyACM0` with your serial port):
+
+```sh
+python example/ramp_gen.py /dev/ttyACM0
+```
 
 ## Notes / 注意
 
@@ -58,6 +75,7 @@ MIT License
 
 ---
 
-This project is maintained by [fanfanlab](https://gitlab.com/fanfanlab)
-```
+The original version of this project is maintained by [fanfanlab][fanfanlab]
 
+
+[fanfanlab]: https://gitlab.com/fanfanlab
